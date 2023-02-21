@@ -24,6 +24,26 @@ provider "azurerm" {
       #tenant_id       = var.ARM_TENANT_ID
 }
 
+# Variables
+variable "ARM_CLIENT_ID" {
+  type        = string
+  description = "Name to be used for resources in this lab"
+}
+
+variable "ARM_CLIENT_SECRET" {
+  type        = string
+  description = "Name to be used for resources in this lab"
+}
+variable "ARM_TENANT_ID" {
+  type        = string
+  description = "Name to be used for resources in this lab"
+}
+variable "ARM_SUBSCRIPTION_ID" {
+  type        = string
+  description = "Name to be used for resources in this lab"
+}
+
+
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "West Europe"
