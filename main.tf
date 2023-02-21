@@ -6,6 +6,14 @@ terraform {
  
     }
 }
+cloud {
+    hostname     = "app.terraform.io"
+    organization = "flyingnets-greg"
+    workspaces = {
+      name = "terraform"
+    }
+  }
+
 }
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
