@@ -3,22 +3,12 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "=3.0.0"
+ 
+      subscription_id = var.ARM_SUBSCRIPTION_ID
+      client_id       = var.ARM_CLIENT_ID
+      client_secret   = var.ARM_CLIENT_SECRET
+      tenant_id       = var.ARM_TENANT_ID
     }
-/*
-tls = {
-      source = "hashicorp/tls"
-      version = "~>4.0"
-    }
-*/
-  }
-backend "azurerm" {
-        resource_group_name  = "greg-rg"
-        storage_account_name = "tfstate28292"
-        container_name       = "tfstate"
-        key                  = "terraform.tfstate"
-    }
-}
-
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
