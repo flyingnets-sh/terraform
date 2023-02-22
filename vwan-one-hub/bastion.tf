@@ -1,20 +1,24 @@
 resource "azurerm_public_ip" "poctest2_bastionpip" {
   name                = "bastionpip"
-  location            = azurerm_resource_group.test2.location
-  resource_group_name = azurerm_resource_group.test2.name
+  location            = var.region1
+  resource_group_name = azurerm_resource_group.region1-rg1.name
   allocation_method   = "Static"
   sku                 = "Standard"
-  tags     = local.common_tags
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 
 resource "azurerm_bastion_host" "poctest2bastion" {
   name                = "poctest2bastion"
-  location            = azurerm_resource_group.test2.location
-  resource_group_name = azurerm_resource_group.test2.name
+  location            = var.region1
+  resource_group_name = azurerm_resource_group.region1-rg1.name
   sku                 = "Standard"
   #ip_connect_enabled  = true
   #tunneling_enabled   = true
-  tags     = local.common_tags
+  tags = {
+    Environment = var.environment_tag
+  }
 
   ip_configuration {
     name                 = "configuration"
@@ -26,9 +30,11 @@ resource "azurerm_bastion_host" "poctest2bastion" {
 
 resource "azurerm_network_security_group" "poctest2bastionnsg" {
   name                = "poctest2bastionnsg"
-  location            = azurerm_resource_group.test2.location
-  resource_group_name = azurerm_resource_group.test2.name
-  tags     = local.common_tags
+  location            = var.region1
+  resource_group_name = azurerm_resource_group.region1-rg1.name
+  tags = {
+    Environment = var.environment_tag
+  }
 
   security_rule {
         name                       = "GatewayManager"
