@@ -48,16 +48,17 @@ resource "tls_private_key" "linux_ssh" {
   rsa_bits  = 4096
 }
 # Create Key Vault Secret
-resource "azurerm_key_vault_secret" "vmpassword" {
-  name         = "vmpassword"
-  value        = random_password.vmpassword.result
-  key_vault_id = azurerm_key_vault.kv1.id
-  depends_on   = [azurerm_key_vault.kv1]
-}
+# resource "azurerm_key_vault_secret" "vmpassword" {
+#   name         = "vmpassword"
+#   value        = random_password.vmpassword.result
+#   key_vault_id = azurerm_key_vault.kv1.id
+#   depends_on   = [azurerm_key_vault.kv1]
+# }
 
 # Creating the Key by importing the SSH private key 
-# resource "azurerm_key_vault_secret" "linux-ssh-key" {
-#   name         = "linux-ssh-key"
-#   value        = tls_private_key.linux_ssh.private_key_pem
-#   key_vault_id = azurerm_key_vault.poctestkv.id
-# }
+resource "azurerm_key_vault_secret" "linux-ssh-key" {
+  name         = "linux-ssh-key"
+  value        = tls_private_key.linux_ssh.private_key_pem
+  key_vault_id = azurerm_key_vault.poctestkv.id
+  depends_on   = [azurerm_key_vault.kv1]
+}

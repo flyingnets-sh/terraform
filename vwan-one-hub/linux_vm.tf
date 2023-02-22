@@ -65,18 +65,18 @@ resource "azurerm_linux_virtual_machine" "region1-linux01" {
   location            = var.region1
   size                = var.vmsize
   admin_username      = var.adminusername
-  admin_password      = azurerm_key_vault_secret.vmpassword.value
+  # admin_password      = azurerm_key_vault_secret.vmpassword.value
   # When an admin_password is specified disable_password_authentication must be set to false
-  disable_password_authentication = false
+  # disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.region1-linux01-nic.id,
   ]
 
   # In general we'd recommend using SSH Keys for authentication rather than Passwords
-  # admin_ssh_key {
-  #  username   = "adminuser"
-  #  public_key = tls_private_key.linux_ssh.public_key_openssh
-  # }
+  admin_ssh_key {
+   username   = "adminuser"
+   public_key = tls_private_key.linux_ssh.public_key_openssh
+  }
 
   # admin_ssh_key {
   #   username   = "adminuser"
@@ -106,18 +106,18 @@ resource "azurerm_linux_virtual_machine" "region2-linux01" {
   location            = var.region2
   size                = var.vmsize
   admin_username      = var.adminusername
-  admin_password      = azurerm_key_vault_secret.vmpassword.value
+  # admin_password      = azurerm_key_vault_secret.vmpassword.value
   # When an admin_password is specified disable_password_authentication must be set to false
-  disable_password_authentication = false
+  # disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.region2-linux01-nic.id,
   ]
 
   # In general we'd recommend using SSH Keys for authentication rather than Passwords
-  # admin_ssh_key {
-  #  username   = "adminuser"
-  #  public_key = tls_private_key.linux_ssh.public_key_openssh
-  # }
+  admin_ssh_key {
+   username   = "adminuser"
+   public_key = tls_private_key.linux_ssh.public_key_openssh
+  }
 
   # admin_ssh_key {
   #   username   = "adminuser"
