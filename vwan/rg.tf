@@ -1,4 +1,5 @@
 # Resource Groups vWAN - Region 1
+######
 resource "azurerm_resource_group" "region1-rg1" {
   name     = "${var.lab-name}-${var.region1}-vwan-rg-01"
   location = var.region1
